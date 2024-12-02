@@ -1,101 +1,171 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { Shield, Clock, CheckCircle, ArrowRight, Lock, FileCheck, Users } from "lucide-react"
+import Link from "next/link"
 
-export default function Home() {
+// Custom Hero SVG Background with dark mode support
+const HeroBackground = () => (
+  <svg className="absolute top-0 right-0 w-1/2 h-auto text-primary/5 dark:text-white/5" viewBox="0 0 800 600">
+    {/* Shield Base */}
+    <path 
+      d="M400 50 L700 150 L700 400 Q400 600 100 400 L100 150 Z" 
+      className="fill-current opacity-20"
+    />
+    
+    {/* Circuit Board Pattern */}
+    <g className="stroke-current" fill="none" strokeWidth="2">
+      <path d="M300 200 H500 M400 200 V400" opacity="0.3" />
+      <path d="M250 300 H550 M400 300 V350" opacity="0.3" />
+      <path d="M200 400 H600" opacity="0.3" strokeDasharray="8 4" />
+    </g>
+    
+    {/* Connection Points */}
+    <g className="fill-current">
+      <circle cx="400" cy="200" r="6" opacity="0.5" />
+      <circle cx="400" cy="300" r="6" opacity="0.5" />
+      <circle cx="400" cy="400" r="6" opacity="0.5" />
+      <circle cx="300" cy="300" r="6" opacity="0.5" />
+      <circle cx="500" cy="300" r="6" opacity="0.5" />
+    </g>
+  </svg>
+);
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="relative min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-slate-950 dark:to-slate-900 overflow-hidden">
+      <HeroBackground />
+      
+      {/* Hero Section */}
+      <section className="relative pt-24 pb-20">
+        <div className="container px-4 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80 dark:from-primary dark:to-primary/60">
+                Fortify Your Business Against Cyber Threats
+              </h1>
+              <p className="text-xl text-muted-foreground">
+                At Foxx Cyber, we specialize in providing top-notch cyber security consulting 
+                services to businesses like yours. Our team of experts understands the importance 
+                of protecting your organization&apos;s sensitive data and reputation.
+              </p>
+              <div className="flex gap-4">
+                <Button size="lg" className="group" asChild>
+                  <Link href="/contact" className="flex items-center">
+                    Get Started
+                    <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/services">Our Services</Link>
+                </Button>
+              </div>
+            </div>
+            
+            {/* Stats/Features Grid */}
+            <div className="grid grid-cols-2 gap-4">
+              <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-slate-800/80 transition-colors">
+                <CardContent className="p-6">
+                  <Lock className="h-8 w-8 text-primary mb-4" />
+                  <h3 className="font-semibold text-lg mb-2">Security First</h3>
+                  <p className="text-muted-foreground">Advanced protection for your critical assets</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-slate-800/80 transition-colors">
+                <CardContent className="p-6">
+                  <FileCheck className="h-8 w-8 text-primary mb-4" />
+                  <h3 className="font-semibold text-lg mb-2">Compliance</h3>
+                  <p className="text-muted-foreground">Meet industry standards and regulations</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-slate-800/80 transition-colors">
+                <CardContent className="p-6">
+                  <Shield className="h-8 w-8 text-primary mb-4" />
+                  <h3 className="font-semibold text-lg mb-2">Expert Team</h3>
+                  <p className="text-muted-foreground">Certified security professionals</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm hover:bg-white/80 dark:hover:bg-slate-800/80 transition-colors">
+                <CardContent className="p-6">
+                  <Users className="h-8 w-8 text-primary mb-4" />
+                  <h3 className="font-semibold text-lg mb-2">24/7 Support</h3>
+                  <p className="text-muted-foreground">Round-the-clock security monitoring</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Key Benefits */}
+      <section className="py-20 bg-gradient-to-r from-blue-50/50 to-indigo-50/50 dark:from-slate-900/50 dark:to-slate-800/50">
+        <div className="container px-4 max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            Why Choose Foxx Cyber
+          </h2>
+          <div className="grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
+            <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transform hover:scale-105 transition-all">
+              <CardHeader className="text-center">
+                <div className="flex justify-center mb-4">
+                  <div className="p-3 rounded-xl bg-primary/10 dark:bg-primary/20">
+                    <Shield className="h-8 w-8 text-primary" />
+                  </div>
+                </div>
+                <CardTitle>Expert Guidance</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center text-muted-foreground">
+                Navigate complex compliance requirements with our experienced team of security professionals.
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transform hover:scale-105 transition-all">
+              <CardHeader className="text-center">
+                <div className="flex justify-center mb-4">
+                  <div className="p-3 rounded-xl bg-primary/10 dark:bg-primary/20">
+                    <Clock className="h-8 w-8 text-primary" />
+                  </div>
+                </div>
+                <CardTitle>Accelerated Timeline</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center text-muted-foreground">
+                Fast-track your ATO process with our proven methodologies and templates.
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transform hover:scale-105 transition-all">
+              <CardHeader className="text-center">
+                <div className="flex justify-center mb-4">
+                  <div className="p-3 rounded-xl bg-primary/10 dark:bg-primary/20">
+                    <CheckCircle className="h-8 w-8 text-primary" />
+                  </div>
+                </div>
+                <CardTitle>Ongoing Support</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center text-muted-foreground">
+                Maintain compliance with continuous monitoring and support from our team.
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-20">
+        <div className="container px-4 max-w-7xl mx-auto text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Secure Your Business?</h2>
+            <p className="text-xl text-muted-foreground mb-8">
+              Contact us today to discuss your security needs and learn how we can help protect 
+              your organization from cyber threats.
+            </p>
+            <Button size="lg" className="group" asChild>
+              <Link href="/contact" className="flex items-center justify-center">
+                Schedule a Consultation
+                <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
