@@ -76,3 +76,112 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Print styles */
+@media print {
+  /* Hide everything except the assessment card */
+  body > *:not(.assessment-container) {
+    display: none !important;
+  }
+
+  /* Show the assessment card and its contents */
+  .assessment-container {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Reset card styles for print */
+  .card {
+    background: white !important;
+    color: black !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /* Add page margins */
+  @page {
+    margin: 2cm;
+    size: portrait;
+  }
+
+  /* Hide non-essential elements */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Style the header */
+  .card-header {
+    border-bottom: 2px solid #000;
+    padding-bottom: 1cm;
+    margin-bottom: 1cm;
+  }
+
+  /* Style the content */
+  .card-content {
+    margin-top: 1cm;
+  }
+
+  /* Style recommendations */
+  div[class*="bg-blue-50"],
+  div[class*="bg-blue-900"] {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    break-inside: avoid;
+    margin: 0.5cm 0;
+    padding: 0.5cm !important;
+  }
+
+  /* Style category headers */
+  p[class*="text-blue-700"],
+  p[class*="text-blue-300"] {
+    color: black !important;
+    font-weight: bold;
+  }
+
+  /* Add page numbers */
+  @page {
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+    }
+  }
+
+  /* Ensure text contrast */
+  p, h1, h2, h3, h4, h5, h6 {
+    color: black !important;
+  }
+
+  /* Format the security score */
+  div[class*="text-4xl"] {
+    font-size: 48px !important;
+    color: black !important;
+    text-align: center;
+    margin: 1cm 0;
+  }
+
+  /* Add company branding */
+  .card-header::before {
+    content: "FoxxCyber Security Assessment";
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 0.5cm;
+  }
+
+  /* Add date */
+  .card-content::after {
+    content: "Assessment Date: " attr(data-date);
+    display: block;
+    text-align: center;
+    margin-top: 2cm;
+    font-size: 12px;
+    color: #666;
+  }
+}

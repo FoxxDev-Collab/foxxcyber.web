@@ -1,7 +1,8 @@
+import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { Shield, FileCheck } from 'lucide-react';
+import { Shield, FileCheck, Cloud, Server, Network, CheckCircle, ArrowRight } from 'lucide-react';
 
 export default function ATOaaSPage() {
   return (
@@ -15,20 +16,16 @@ export default function ATOaaSPage() {
                 ATO as a Service
               </h1>
               <p className="text-xl text-gray-600 dark:text-gray-300">
-                Streamline your Authority to Operate process with our comprehensive service
+                Comprehensive system security and compliance for your mission-critical applications, wether they be on the cloud, on-premises, or a mix of both. Foxx Cyber 
+                professionals have experience in securiting systems within the federal government and can help you achieve your ATO.
               </p>
             </div>
             
-            {/* Custom Shield SVG */}
+            {/* Custom Shield SVG - keeping the existing one as it works well */}
             <div className="md:w-1/2 flex justify-center">
               <svg className="w-full max-w-lg h-auto" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-                {/* Shield Base */}
-                <path 
-                  d="M200 50 L350 100 L350 200 Q350 300 200 350 Q50 300 50 200 L50 100 Z" 
-                  className="fill-primary/10 dark:fill-primary/20"
-                />
-                
-                {/* Circuit Lines */}
+                <path d="M200 50 L350 100 L350 200 Q350 300 200 350 Q50 300 50 200 L50 100 Z" 
+                  className="fill-primary/10 dark:fill-primary/20"/>
                 <g className="stroke-primary/30 dark:stroke-primary/40" strokeWidth="2" fill="none">
                   <path d="M100 150 L300 150" />
                   <path d="M150 200 L250 200" />
@@ -37,8 +34,6 @@ export default function ATOaaSPage() {
                   <path d="M150 150 L150 200" />
                   <path d="M250 150 L250 200" />
                 </g>
-                
-                {/* Connection Points */}
                 <g className="fill-primary dark:fill-primary/80">
                   <circle cx="150" cy="150" r="4" />
                   <circle cx="200" cy="150" r="4" />
@@ -54,7 +49,7 @@ export default function ATOaaSPage() {
         </div>
       </section>
 
-      {/* What is ATO & Why Choose Us */}
+      {/* What is ATO & System Security */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
@@ -62,10 +57,12 @@ export default function ATOaaSPage() {
               <CardContent className="p-6 space-y-4">
                 <div className="flex items-center gap-4">
                   <Shield className="w-8 h-8 text-primary" />
-                  <h2 className="text-2xl font-semibold">What is ATO?</h2>
+                  <h2 className="text-2xl font-semibold">System-Level Security</h2>
                 </div>
                 <p className="text-gray-600 dark:text-gray-300">
-                  An Authority to Operate (ATO) is a formal declaration that authorizes a system to process information at an acceptable level of risk. It&apos;s required for systems that handle government data or operate in regulated environments.
+                  Our ATO service provides comprehensive security coverage for your entire system - from infrastructure 
+                  components like VMs and firewalls to application code and third-party integrations. We ensure every 
+                  aspect of your system meets rigorous security standards.
                 </p>
               </CardContent>
             </Card>
@@ -74,10 +71,12 @@ export default function ATOaaSPage() {
               <CardContent className="p-6 space-y-4">
                 <div className="flex items-center gap-4">
                   <FileCheck className="w-8 h-8 text-primary" />
-                  <h2 className="text-2xl font-semibold">Why Choose Us?</h2>
+                  <h2 className="text-2xl font-semibold">Compliance Coverage</h2>
                 </div>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Our team of security experts has extensive experience in navigating the complex ATO process. We&apos;ll guide you through each step, ensuring compliance and minimizing delays.
+                  Whether you need FedRAMP, NIST, or CMMC compliance, our team guides you through the entire process - 
+                  from initial system categorization to continuous monitoring, ensuring your ATO package meets all 
+                  regulatory requirements.
                 </p>
               </CardContent>
             </Card>
@@ -85,19 +84,154 @@ export default function ATOaaSPage() {
         </div>
       </section>
 
-      {/* Process Steps */}
+      {/* System Types & Pricing */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-semibold text-center mb-12">System-Specific ATO Packages</h2>
+          <div className="grid gap-8 md:grid-cols-3 max-w-6xl mx-auto">
+            {/* Cloud Systems */}
+            <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur transform hover:scale-105 transition-all">
+              <CardHeader>
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-xl bg-primary/10 dark:bg-primary/20">
+                    <Cloud className="h-8 w-8 text-primary" />
+                  </div>
+                  <div>
+                    <CardTitle>Cloud Systems</CardTitle>
+                    <p className="text-sm text-gray-500">4-6 Month Timeline</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="mb-6">
+                  <p className="text-3xl font-bold">$75,000+</p>
+                </div>
+                <ul className="space-y-3 text-gray-600 dark:text-gray-300">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    Cloud-native applications
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    SaaS platforms
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    Cloud security architecture review
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    CSP compliance mapping
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    Container security assessment
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* On-Premises Systems */}
+            <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur transform hover:scale-105 transition-all">
+              <CardHeader>
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-xl bg-primary/10 dark:bg-primary/20">
+                    <Server className="h-8 w-8 text-primary" />
+                  </div>
+                  <div>
+                    <CardTitle>On-Premises</CardTitle>
+                    <p className="text-sm text-gray-500">6-8 Month Timeline</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="mb-6">
+                  <p className="text-3xl font-bold">$100,000+</p>
+                </div>
+                <ul className="space-y-3 text-gray-600 dark:text-gray-300">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    Data center systems
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    Legacy applications
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    Physical security assessment
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    Network security review
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    System hardening
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            {/* Hybrid Systems */}
+            <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur transform hover:scale-105 transition-all">
+              <CardHeader>
+                <div className="flex items-center gap-4">
+                  <div className="p-3 rounded-xl bg-primary/10 dark:bg-primary/20">
+                    <Network className="h-8 w-8 text-primary" />
+                  </div>
+                  <div>
+                    <CardTitle>Hybrid Systems</CardTitle>
+                    <p className="text-sm text-gray-500">8-12 Month Timeline</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="mb-6">
+                  <p className="text-3xl font-bold">$150,000+</p>
+                </div>
+                <ul className="space-y-3 text-gray-600 dark:text-gray-300">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    Mixed infrastructure
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    Complex integrations
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    Boundary analysis
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    Multi-environment controls
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle className="h-5 w-5 text-primary/70" />
+                    Cross-platform security
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Process Steps - keeping but updated content */}
       <section className="py-16 relative">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-semibold text-center mb-12">Our Process</h2>
+          <h2 className="text-3xl font-semibold text-center mb-12">Our ATO Process</h2>
           <div className="grid gap-6 md:grid-cols-3 max-w-4xl mx-auto relative">
             <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur transform hover:scale-105 transition-transform">
               <CardContent className="p-6 space-y-4">
                 <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mb-4">
                   <span className="text-primary font-bold text-xl">1</span>
                 </div>
-                <h3 className="text-xl font-semibold">Assessment</h3>
+                <h3 className="text-xl font-semibold">System Analysis</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  We evaluate your current system architecture and security controls against relevant standards and requirements.
+                  Complete system inventory and architecture review, security categorization, and control selection based on 
+                  system type and compliance requirements.
                 </p>
               </CardContent>
             </Card>
@@ -107,9 +241,10 @@ export default function ATOaaSPage() {
                 <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mb-4">
                   <span className="text-primary font-bold text-xl">2</span>
                 </div>
-                <h3 className="text-xl font-semibold">Documentation</h3>
+                <h3 className="text-xl font-semibold">Implementation</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Our team prepares comprehensive documentation, including System Security Plans (SSP) and security control implementations.
+                  Security control implementation, documentation development including SSP, and creation of all required 
+                  artifacts and evidence.
                 </p>
               </CardContent>
             </Card>
@@ -119,31 +254,30 @@ export default function ATOaaSPage() {
                 <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mb-4">
                   <span className="text-primary font-bold text-xl">3</span>
                 </div>
-                <h3 className="text-xl font-semibold">Implementation</h3>
+                <h3 className="text-xl font-semibold">Authorization</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  We implement required security controls and conduct testing to ensure compliance with ATO requirements.
+                  Assessment coordination, POA&M development, package submission, and transition to continuous monitoring 
+                  after authorization.
                 </p>
               </CardContent>
             </Card>
           </div>
         </div>
-
-        {/* Background decoration */}
-        <svg className="absolute top-0 right-0 -z-10 w-96 h-96 text-primary/5 dark:text-primary/10" viewBox="0 0 200 200">
-          <path fill="currentColor" d="M44,-76.5C58.7,-69.1,73.3,-60.1,81.2,-47C89.1,-33.9,90.2,-16.9,88.7,-0.9C87.2,15.2,83,30.3,75.2,43.2C67.4,56.1,56,66.7,42.5,74.4C28.9,82.1,13.2,86.8,-1.9,89.7C-17,92.6,-34,93.7,-48.4,87.3C-62.8,81,-74.5,67.2,-83.3,51.8C-92.1,36.4,-98,19.2,-97.8,2.2C-97.5,-14.8,-91.1,-29.6,-82.1,-42.3C-73.1,-55,-61.5,-65.6,-47.8,-73.3C-34.1,-81,-17,-85.8,-1,-84.3C15,-82.8,30,-83.9,44,-76.5Z" />
-        </svg>
       </section>
 
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-900/50 dark:to-slate-800/50">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6 max-w-2xl mx-auto">
-            <h2 className="text-3xl font-semibold dark:text-gray-50">Ready to Get Started?</h2>
+            <h2 className="text-3xl font-semibold dark:text-gray-50">Ready to Secure Your System?</h2>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              Contact us today to learn how we can help streamline your ATO process
+              Contact us today to discuss your system&apos;s security requirements and start your ATO journey
             </p>
-            <Button asChild size="lg">
-              <Link href="/contact">Contact Us</Link>
+            <Button asChild size="lg" className="group">
+              <Link href="/contact" className="flex items-center">
+                Schedule a Consultation
+                <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
           </div>
         </div>
@@ -156,33 +290,50 @@ export default function ATOaaSPage() {
           <div className="space-y-4 max-w-4xl mx-auto">
             <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur">
               <CardContent className="p-6 space-y-2">
-                <h3 className="text-xl font-semibold">How long does the ATO process take?</h3>
+                <h3 className="text-xl font-semibold">What exactly constitutes a &quot;system&quot; for ATO purposes?</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  The duration varies depending on system complexity and requirements. We&apos;ll provide a detailed timeline after initial assessment.
+                  A system encompasses all components needed to deliver your service or application - including infrastructure 
+                  (VMs, networks, firewalls), software components, databases, and third-party integrations. Our ATO package 
+                  covers everything within your system boundary that needs to be secured and documented.
                 </p>
               </CardContent>
             </Card>
 
             <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur">
               <CardContent className="p-6 space-y-2">
-                <h3 className="text-xl font-semibold">What standards do you support?</h3>
+                <h3 className="text-xl font-semibold">How do you handle system changes during the ATO process?</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  We support various frameworks including FedRAMP, NIST, and CMMC. Our team stays current with evolving requirements.
+                  We implement change management procedures from the start. While major system changes during the ATO process 
+                  should be minimized, our approach includes flexibility for necessary updates and proper documentation of 
+                  all changes to maintain compliance alignment.
                 </p>
               </CardContent>
             </Card>
 
             <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur">
               <CardContent className="p-6 space-y-2">
-                <h3 className="text-xl font-semibold">What happens after ATO is granted?</h3>
+                <h3 className="text-xl font-semibold">What happens after we receive our ATO?</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  We provide continuous monitoring and support to maintain compliance and address any changes that might affect your ATO status.
+                  We transition into continuous monitoring mode, helping you maintain your security posture and ATO status. 
+                  This includes regular control assessments, continuous monitoring implementation, security metric tracking, 
+                  and support for system updates or changes that could impact your authorization status.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur">
+              <CardContent className="p-6 space-y-2">
+                <h3 className="text-xl font-semibold">What determines the final pricing for an ATO package?</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Pricing is based on system complexity factors including number of interfaces/integrations, data sensitivity 
+                  levels, user base size, technical architecture complexity, and specific compliance requirements. We provide 
+                  detailed pricing after initial system assessment.
                 </p>
               </CardContent>
             </Card>
           </div>
         </div>
       </section>
-    </div>
-  );
-}
+      </div>
+    );
+  }

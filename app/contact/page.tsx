@@ -1,5 +1,4 @@
-import { Mail } from 'lucide-react';
-import { Card, CardContent } from "@/components/ui/card";
+import Form  from "@/app/contact/form"; // Adjust import path as needed
 
 export default function ContactPage() {
   return (
@@ -10,23 +9,7 @@ export default function ContactPage() {
             Contact Us
           </h1>
           
-          <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur">
-            <CardContent className="pt-6 flex flex-col items-center text-center">
-              <Mail className="w-12 h-12 text-primary mb-6" />
-              <h2 className="text-2xl font-semibold mb-4 dark:text-gray-100">
-                Get in Touch
-              </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-2">
-                Please email:
-              </p>
-              <a 
-                href="mailto:jprice@foxxcyber.com"
-                className="text-xl font-semibold text-primary hover:underline"
-              >
-                jprice@foxxcyber.com
-              </a>
-            </CardContent>
-          </Card>
+          <Form />
         </div>
       </div>
     </div>
