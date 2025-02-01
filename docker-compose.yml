@@ -10,6 +10,8 @@ services:
       - TWENTY_CRM_URL=${TWENTY_CRM_URL}
       - TWENTY_API_KEY=${TWENTY_API_KEY}
       - REDIS_URL=redis://redis:6389
+      - TWENTY_CRM_URL="http://localhost:3000"
+      - TWENTY_API_KEY="paste_your_key_here"
     depends_on:
       - redis
     restart: unless-stopped
