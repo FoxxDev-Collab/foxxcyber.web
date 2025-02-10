@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FoxxCyber Web Application
 
-## Getting Started
+## Docker Deployment Guide
 
-First, run the development server:
+This guide will help you deploy the FoxxCyber web application on your VPS using Docker.
 
+### Prerequisites
+
+- A VPS with Docker and Docker Compose installed
+- Git installed on your VPS
+- Domain name (optional but recommended)
+
+### Installation Steps
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [your-repository-url]
+cd foxxcyber.web
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Set up environment variables:
+```bash
+cp .env.production.example .env.production
+```
+Edit `.env.production` with your actual values:
+- Set `TWENTY_CRM_URL` to your Twenty CRM instance URL
+- Set `TWENTY_API_KEY` to your Twenty CRM API key
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Build and start the containers:
+```bash
+docker compose up -d
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application will be available at `http://your-server-ip:3001`
 
-## Learn More
+### Configuration
 
-To learn more about Next.js, take a look at the following resources:
+- The application runs on port 3001 by default (mapped from container port 3000)
+- Redis is used for rate limiting and caching
+- All data persists through Docker volumes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Resource Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The Docker configuration includes resource limits:
+- Web application: Max 1 CPU, 1GB RAM
+- Redis: Max 0.5 CPU, 512MB RAM
 
-## Deploy on Vercel
+### Health Checks
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Both services include health checks:
+- Web application: Checks `/api/health` endpoint every 30 seconds
+- Redis: Performs PING command every 30 seconds
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Maintenance
+
+To view logs:
+```bash
+docker compose logs -f
+```
+
+To update the application:
+```bash
+git pull
+docker compose down
+docker compose up -d --build
+```
+
+### Backup
+
+Redis data is persisted in a Docker volume. To backup the data:
+```bash
+docker run --rm -v foxxcyber.web_redis_data:/data -v $(pwd)/backup:/backup alpine tar czf /backup/redis-backup.tar.gz /data
+```
+
+### Troubleshooting
+
+If the application fails to start:
+1. Check logs: `docker compose logs`
+2. Verify environment variables in `.env.production`
+3. Ensure all required ports are available
+4. Check system resources
+
+For more detailed logs:
+```bash
+docker compose logs -f --tail=100
