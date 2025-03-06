@@ -2,7 +2,8 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { Shield, FileCheck, Cloud, Server, Network, CheckCircle, ArrowRight } from 'lucide-react';
+import { Shield, FileCheck, Cloud, Server, Network, CheckCircle, ArrowRight, UserCheck, BadgeCheck, LockIcon } from 'lucide-react';
+
 
 export default function ATOaaSPage() {
   return (
@@ -16,8 +17,9 @@ export default function ATOaaSPage() {
                 ATO as a Service
               </h1>
               <p className="text-xl text-gray-600 dark:text-gray-300">
-                Comprehensive system security and compliance for your mission-critical applications, wether they be on the cloud, on-premises, or a mix of both. Foxx Cyber 
-                professionals have experience in securiting systems within the federal government and can help you achieve your ATO.
+                Prove to your customers that you&apos;re actively protecting their data with our ATO as a Service. 
+                Whether you need to meet NIST requirements, protect sensitive information, or prepare for government 
+                opportunities, our comprehensive process delivers the security verification your business needs.
               </p>
             </div>
             
@@ -49,6 +51,56 @@ export default function ATOaaSPage() {
         </div>
       </section>
 
+      {/* What is ATO & Why You Need It - NEW SECTION */}
+      <section className="py-16 bg-white/80 dark:bg-slate-800/80">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 dark:text-gray-50">Why Your Business Needs ATO</h2>
+          <div className="grid gap-8 md:grid-cols-3 max-w-5xl mx-auto">
+            <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur">
+              <CardContent className="pt-6">
+                <div className="p-3 rounded-xl bg-primary/10 dark:bg-primary/20 inline-flex mb-4">
+                  <BadgeCheck className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 dark:text-gray-100">Demonstrate Security Maturity</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Our ATO process provides independent verification of your security controls, giving your customers and 
+                  partners confidence that you&apos;re serious about protecting their data. Think of it as a security badge 
+                  that proves your commitment to cybersecurity excellence.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur">
+              <CardContent className="pt-6">
+                <div className="p-3 rounded-xl bg-primary/10 dark:bg-primary/20 inline-flex mb-4">
+                  <LockIcon className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 dark:text-gray-100">Protect Sensitive Data</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Implement robust safeguards for PII/PHI using NIST Risk Management Framework. Our approach ensures 
+                  that personal and sensitive data gets the highest level of protection, reducing breach risks and 
+                  helping you meet regulatory requirements.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur">
+              <CardContent className="pt-6">
+                <div className="p-3 rounded-xl bg-primary/10 dark:bg-primary/20 inline-flex mb-4">
+                  <UserCheck className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 dark:text-gray-100">Unlock Government Opportunities</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Businesses seeking government contracts need to demonstrate compliance with standards like NIST, 
+                  FedRAMP, and others. Our ATO process prepares your systems for these requirements, opening doors 
+                  to lucrative government market opportunities.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* What is ATO & System Security */}
       <section className="py-16">
         <div className="container mx-auto px-4">
@@ -57,12 +109,12 @@ export default function ATOaaSPage() {
               <CardContent className="p-6 space-y-4">
                 <div className="flex items-center gap-4">
                   <Shield className="w-8 h-8 text-primary" />
-                  <h2 className="text-2xl font-semibold">System-Level Security</h2>
+                  <h2 className="text-2xl font-semibold">Complete Security Assessment</h2>
                 </div>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Our ATO service provides comprehensive security coverage for your entire system - from infrastructure 
-                  components like VMs and firewalls to application code and third-party integrations. We ensure every 
-                  aspect of your system meets rigorous security standards.
+                  Our ATO process provides a thorough evaluation of your entire system - from infrastructure 
+                  to application code and third-party integrations. This comprehensive approach ensures no 
+                  security gaps are overlooked and gives you documented evidence of your security controls.
                 </p>
               </CardContent>
             </Card>
@@ -71,12 +123,12 @@ export default function ATOaaSPage() {
               <CardContent className="p-6 space-y-4">
                 <div className="flex items-center gap-4">
                   <FileCheck className="w-8 h-8 text-primary" />
-                  <h2 className="text-2xl font-semibold">Compliance Coverage</h2>
+                  <h2 className="text-2xl font-semibold">Tailored Compliance Mapping</h2>
                 </div>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Whether you need FedRAMP, NIST, or CMMC compliance, our team guides you through the entire process - 
-                  from initial system categorization to continuous monitoring, ensuring your ATO package meets all 
-                  regulatory requirements.
+                  We map your security controls to the standards that matter most for your business - whether 
+                  it&apos;s NIST frameworks for protecting PII/PHI, or preparing for FedRAMP and other government 
+                  compliance requirements. This creates a clear path to demonstrable compliance.
                 </p>
               </CardContent>
             </Card>
@@ -218,7 +270,56 @@ export default function ATOaaSPage() {
         </div>
       </section>
 
-      {/* Process Steps - keeping but updated content */}
+      {/* NIST Compliance - NEW SECTION */}
+      <section className="py-16 bg-white/80 dark:bg-slate-800/80">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center dark:text-gray-50">Protect Sensitive Data with NIST RMF</h2>
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <div className="bg-white/50 dark:bg-slate-800/30 rounded-lg p-6 shadow-sm">
+                <h3 className="text-xl font-semibold mb-4 text-primary dark:text-primary/90 flex items-center">
+                  <Shield className="w-6 h-6 mr-2" />
+                  Comprehensive PII/PHI Protection
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Our NIST Risk Management Framework implementation provides robust protection for personally identifiable 
+                  information (PII) and protected health information (PHI). We help you implement the appropriate controls 
+                  to safeguard your most sensitive data.
+                </p>
+              </div>
+              
+              <div className="bg-white/50 dark:bg-slate-800/30 rounded-lg p-6 shadow-sm">
+                <h3 className="text-xl font-semibold mb-4 text-primary dark:text-primary/90 flex items-center">
+                  <BadgeCheck className="w-6 h-6 mr-2" />
+                  Compliance Verification
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  We provide documentation and evidence that you can share with customers, partners, and auditors to 
+                  demonstrate your compliance with NIST standards. This verification serves as proof of your security 
+                  commitment.
+                </p>
+              </div>
+            </div>
+            
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-900/50 dark:to-slate-800/50 rounded-lg p-8 text-center">
+              <h3 className="text-xl font-semibold mb-4 dark:text-gray-100">Ready for Government Contracts?</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Our ATO process can be tailored to meet FedRAMP requirements, positioning your business for 
+                government contract opportunities. Let us help you navigate the complex world of federal 
+                compliance.
+              </p>
+              <Button asChild size="lg" className="group">
+                <Link href="/contact" className="flex items-center">
+                  Learn About FedRAMP Readiness
+                  <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Process Steps */}
       <section className="py-16 relative">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-semibold text-center mb-12">Our ATO Process</h2>
@@ -244,7 +345,7 @@ export default function ATOaaSPage() {
                 <h3 className="text-xl font-semibold">Implementation</h3>
                 <p className="text-gray-600 dark:text-gray-300">
                   Security control implementation, documentation development including SSP, and creation of all required 
-                  artifacts and evidence.
+                  artifacts and evidence that can be shared with stakeholders for verification.
                 </p>
               </CardContent>
             </Card>
@@ -254,10 +355,10 @@ export default function ATOaaSPage() {
                 <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mb-4">
                   <span className="text-primary font-bold text-xl">3</span>
                 </div>
-                <h3 className="text-xl font-semibold">Authorization</h3>
+                <h3 className="text-xl font-semibold">Authorization & Evidence</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Assessment coordination, POA&M development, package submission, and transition to continuous monitoring 
-                  after authorization.
+                  Assessment coordination, formal documentation, and transition to continuous monitoring after authorization. 
+                  You&apos;ll receive comprehensive evidence to demonstrate your security posture to customers.
                 </p>
               </CardContent>
             </Card>
@@ -269,9 +370,10 @@ export default function ATOaaSPage() {
       <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-900/50 dark:to-slate-800/50">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-6 max-w-2xl mx-auto">
-            <h2 className="text-3xl font-semibold dark:text-gray-50">Ready to Secure Your System?</h2>
+            <h2 className="text-3xl font-semibold dark:text-gray-50">Prove Your Security Commitment</h2>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              Contact us today to discuss your system&apos;s security requirements and start your ATO journey
+              Contact us today to discuss how our ATO process can help you demonstrate your security efforts, 
+              protect sensitive data, and open new business opportunities.
             </p>
             <Button asChild size="lg" className="group">
               <Link href="/contact" className="flex items-center">
@@ -290,33 +392,33 @@ export default function ATOaaSPage() {
           <div className="space-y-4 max-w-4xl mx-auto">
             <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur">
               <CardContent className="p-6 space-y-2">
-                <h3 className="text-xl font-semibold">What exactly constitutes a &quot;system&quot; for ATO purposes?</h3>
+                <h3 className="text-xl font-semibold">How does an ATO help businesses that don&apos;t work with government?</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  A system encompasses all components needed to deliver your service or application - including infrastructure 
-                  (VMs, networks, firewalls), software components, databases, and third-party integrations. Our ATO package 
-                  covers everything within your system boundary that needs to be secured and documented.
+                  An ATO provides independent validation of your security controls, which builds customer trust and demonstrates 
+                  your commitment to data protection. It serves as evidence during security questionnaires, sales processes, 
+                  and partner negotiations, giving you a competitive edge in the marketplace.
                 </p>
               </CardContent>
             </Card>
 
             <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur">
               <CardContent className="p-6 space-y-2">
-                <h3 className="text-xl font-semibold">How do you handle system changes during the ATO process?</h3>
+                <h3 className="text-xl font-semibold">How do you protect sensitive PII/PHI data using the NIST framework?</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  We implement change management procedures from the start. While major system changes during the ATO process 
-                  should be minimized, our approach includes flexibility for necessary updates and proper documentation of 
-                  all changes to maintain compliance alignment.
+                  We implement the NIST Risk Management Framework controls specifically designed for PII/PHI protection, 
+                  including data classification, access control, encryption, audit logging, and incident response procedures. 
+                  This comprehensive approach ensures your sensitive data receives appropriate safeguards.
                 </p>
               </CardContent>
             </Card>
 
             <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur">
               <CardContent className="p-6 space-y-2">
-                <h3 className="text-xl font-semibold">What happens after we receive our ATO?</h3>
+                <h3 className="text-xl font-semibold">What can we share with our customers after completing the ATO process?</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  We transition into continuous monitoring mode, helping you maintain your security posture and ATO status. 
-                  This includes regular control assessments, continuous monitoring implementation, security metric tracking, 
-                  and support for system updates or changes that could impact your authorization status.
+                  After completing our ATO process, you&apos;ll receive formal documentation that confirms your compliance with relevant 
+                  security frameworks. This includes a System Security Plan (SSP) summary, control implementation status, 
+                  and a formal letter of attestation that you can share with customers as evidence of your security commitment.
                 </p>
               </CardContent>
             </Card>
@@ -334,6 +436,6 @@ export default function ATOaaSPage() {
           </div>
         </div>
       </section>
-      </div>
-    );
-  }
+    </div>
+  );
+}

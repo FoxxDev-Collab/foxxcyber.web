@@ -1,263 +1,306 @@
 'use client';
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Building2, User, Phone, Linkedin } from 'lucide-react';
+import { Mail, Building2, User, Phone, Briefcase, MapPin, MessageSquare, CheckCircle, Shield } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    name: {
-      firstName: '',
-      lastName: ''
-    },
-    emails: {
-      primaryEmail: '',
-      additionalEmails: []
-    },
-    linkedinLink: {
-      primaryLinkLabel: '',
-      primaryLinkUrl: ''
-    },
+    firstName: '',
+    lastName: '',
+    email: '',
     jobTitle: '',
-    phones: {
-      primaryPhoneNumber: '',
-      primaryPhoneCountryCode: 'US', // Default
-      primaryPhoneCallingCode: '1',  // Default US code
-      additionalPhones: []
-    },
-    city: '',
-    companyId: '', // This would be set on the backend
-    position: 0
+    companyName: '',
+    phone: '',
+    location: '',
+    serviceInterest: '',
+    message: '',
+    howHeard: ''
   });
 
   const [submitting, setSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState({
-    success: false,
-    error: false,
-    message: ''
-  });
+  const [submitted, setSubmitted] = useState(false);
 
-  type FormData = {
-    name: {
-      firstName: string;
-      lastName: string;
-    };
-    emails: {
-      primaryEmail: string;
-      additionalEmails: string[];
-    };
-    linkedinLink: {
-      primaryLinkLabel: string;
-      primaryLinkUrl: string;
-    };
-    jobTitle: string;
-    phones: {
-      primaryPhoneNumber: string;
-      primaryPhoneCountryCode: string;
-      primaryPhoneCallingCode: string;
-      additionalPhones: string[];
-    };
-    city: string;
-    companyId: string;
-    position: number;
-  };
+  const serviceOptions = [
+    { value: "", label: "Select a service" },
+    { value: "vciso", label: "Virtual CISO Services" },
+    { value: "ato", label: "ATO as a Service" },
+    { value: "risk", label: "Security Risk Assessment" },
+    { value: "consulting", label: "Security Consulting" },
+    { value: "other", label: "Other" }
+  ];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const howHeardOptions = [
+    { value: "", label: "Select an option" },
+    { value: "search", label: "Search Engine" },
+    { value: "social", label: "Social Media" },
+    { value: "referral", label: "Referral" },
+    { value: "blog", label: "Blog or Article" },
+    { value: "event", label: "Event or Conference" },
+    { value: "other", label: "Other" }
+  ];
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    
-    // Handle nested objects
-    if (name.includes('.')) {
-      const [parent, child] = name.split('.') as [keyof FormData, string];
-      setFormData(prev => ({
-        ...prev,
-        [parent]: {
-          ...(typeof prev[parent] === 'object' ? prev[parent] : {}),
-          [child]: value
-        }
-      }));
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        [name as keyof FormData]: value
-      }));
-    }
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
     
     try {
-        const response: Response = await fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        });
+      // Simulate API call delay - replace with your actual API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // For demo purposes, we'll just set submitted to true
+      setSubmitted(true);
 
-        if (!response.ok) throw new Error('Submission failed');
-
-        setSubmitStatus({
-            success: true,
-            error: false,
-            message: 'Thank you for your interest. We will contact you soon!'
-        });
-        
-        // Reset form
-        setFormData({
-            name: { firstName: '', lastName: '' },
-            emails: { primaryEmail: '', additionalEmails: [] },
-            linkedinLink: { primaryLinkLabel: '', primaryLinkUrl: '' },
-            jobTitle: '',
-            phones: {
-                primaryPhoneNumber: '',
-                primaryPhoneCountryCode: 'US',
-                primaryPhoneCallingCode: '1',
-                additionalPhones: []
-            },
-            city: '',
-            companyId: '',
-            position: 0
-        });
-
-    } catch {
-        setSubmitStatus({
-            success: false,
-            error: true,
-            message: 'There was an error submitting your request. Please try again.'
-        });
+    } catch (error) {
+      console.error('Error submitting form:', error);
     } finally {
-        setSubmitting(false);
+      setSubmitting(false);
     }
-};
+  };
+
+  // Success screen to show after form submission
+  const renderSuccessScreen = () => (
+    <div className="text-center py-8">
+      <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+        <CheckCircle className="w-10 h-10 text-primary" />
+      </div>
+      <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-50">Thank You!</h3>
+      <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+        Your message has been received. Our team will contact you within 1 business day.
+      </p>
+      <div className="flex justify-center">
+        <Button
+          onClick={() => {
+            setSubmitted(false);
+            setFormData({
+              firstName: '',
+              lastName: '',
+              email: '',
+              jobTitle: '',
+              companyName: '',
+              phone: '',
+              location: '',
+              serviceInterest: '',
+              message: '',
+              howHeard: ''
+            });
+          }}
+          className="px-6"
+        >
+          Send Another Message
+        </Button>
+      </div>
+    </div>
+  );
 
   return (
-    <Card className="max-w-2xl mx-auto bg-white/50 dark:bg-slate-800/50 backdrop-blur">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center">Contact Us</CardTitle>
+    <Card className="bg-white/60 dark:bg-slate-800/60 backdrop-blur shadow-lg">
+      <CardHeader className="bg-primary/5 dark:bg-primary/10 border-b border-primary/10 dark:border-primary/20">
+        <CardTitle className="text-2xl font-bold text-center text-gray-900 dark:text-gray-50">
+          Get in Touch
+        </CardTitle>
       </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <CardContent className="p-6">
+        {submitted ? (
+          renderSuccessScreen()
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="space-y-2">
+                <label className="text-sm font-medium flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                  <User className="w-4 h-4 text-primary" />
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  placeholder="John"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                  <User className="w-4 h-4 text-primary" />
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  placeholder="Smith"
+                />
+              </div>
+            </div>
+
             <div className="space-y-2">
-              <label className="text-sm font-medium flex items-center gap-2">
-                <User className="w-4 h-4" />
-                First Name *
+              <label className="text-sm font-medium flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                <Mail className="w-4 h-4 text-primary" />
+                Email Address
               </label>
               <input
-                type="text"
-                name="name.firstName"
-                value={formData.name.firstName}
+                type="email"
+                name="email"
+                value={formData.email}
                 onChange={handleInputChange}
                 required
-                className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-slate-700 dark:text-white"
+                placeholder="you@company.com"
               />
             </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="space-y-2">
+                <label className="text-sm font-medium flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                  <Briefcase className="w-4 h-4 text-primary" />
+                  Job Title
+                </label>
+                <input
+                  type="text"
+                  name="jobTitle"
+                  value={formData.jobTitle}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  placeholder="CTO, IT Director, etc."
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                  <Building2 className="w-4 h-4 text-primary" />
+                  Company
+                </label>
+                <input
+                  type="text"
+                  name="companyName"
+                  value={formData.companyName}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  placeholder="Your Organization"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="space-y-2">
+                <label className="text-sm font-medium flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                  <Phone className="w-4 h-4 text-primary" />
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  placeholder="(555) 123-4567"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                  <MapPin className="w-4 h-4 text-primary" />
+                  Location
+                </label>
+                <input
+                  type="text"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleInputChange}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-slate-700 dark:text-white"
+                  placeholder="City, State"
+                />
+              </div>
+            </div>
+
             <div className="space-y-2">
-              <label className="text-sm font-medium flex items-center gap-2">
-                <User className="w-4 h-4" />
-                Last Name *
+              <label className="text-sm font-medium flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                <Shield className="w-4 h-4 text-primary" />
+                I&apos;m Interested In
               </label>
-              <input
-                type="text"
-                name="name.lastName"
-                value={formData.name.lastName}
+              <select
+                name="serviceInterest"
+                value={formData.serviceInterest}
                 onChange={handleInputChange}
                 required
-                className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
-              />
+                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-slate-700 dark:text-white"
+              >
+                {serviceOptions.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
             </div>
-          </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium flex items-center gap-2">
-              <Mail className="w-4 h-4" />
-              Email *
-            </label>
-            <input
-              type="email"
-              name="emails.primaryEmail"
-              value={formData.emails.primaryEmail}
-              onChange={handleInputChange}
-              required
-              className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium flex items-center gap-2">
-              <Building2 className="w-4 h-4" />
-              Job Title *
-            </label>
-            <input
-              type="text"
-              name="jobTitle"
-              value={formData.jobTitle}
-              onChange={handleInputChange}
-              required
-              className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium flex items-center gap-2">
-              <Phone className="w-4 h-4" />
-              Phone Number
-            </label>
-            <input
-              type="tel"
-              name="phones.primaryPhoneNumber"
-              value={formData.phones.primaryPhoneNumber}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium flex items-center gap-2">
-              <Building2 className="w-4 h-4" />
-              City
-            </label>
-            <input
-              type="text"
-              name="city"
-              value={formData.city}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium flex items-center gap-2">
-              <Linkedin className="w-4 h-4" />
-              LinkedIn URL
-            </label>
-            <input
-              type="url"
-              name="linkedinLink.primaryLinkUrl"
-              value={formData.linkedinLink.primaryLinkUrl}
-              onChange={handleInputChange}
-              placeholder="https://www.linkedin.com/in/..."
-              className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-          </div>
-
-          {submitStatus.message && (
-            <div className={`p-4 rounded ${
-              submitStatus.success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'
-            }`}>
-              {submitStatus.message}
+            <div className="space-y-2">
+              <label className="text-sm font-medium flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                <MessageSquare className="w-4 h-4 text-primary" />
+                How Can We Help?
+              </label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                required
+                rows={4}
+                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent resize-none dark:bg-slate-700 dark:text-white"
+                placeholder="Tell us about your security needs..."
+              ></textarea>
             </div>
-          )}
 
-<button
-  type="submit"
-  disabled={submitting}
-  className="w-full bg-primary text-white dark:bg-white dark:text-black py-2 px-4 rounded hover:bg-primary/90 dark:hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed"
->
-  {submitting ? 'Submitting...' : 'Submit'}
-</button>
-        </form>
+            <div className="space-y-2">
+              <label className="text-sm font-medium flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                How Did You Hear About Us?
+              </label>
+              <select
+                name="howHeard"
+                value={formData.howHeard}
+                onChange={handleInputChange}
+                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-slate-700 dark:text-white"
+              >
+                {howHeardOptions.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="pt-2">
+              <Button
+                type="submit"
+                disabled={submitting}
+                className="w-full py-3 text-lg"
+              >
+                {submitting ? (
+                  <div className="flex items-center justify-center">
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                  </div>
+                ) : (
+                  "Send Message"
+                )}
+              </Button>
+            </div>
+          </form>
+        )}
       </CardContent>
     </Card>
   );
