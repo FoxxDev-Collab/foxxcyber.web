@@ -1,85 +1,54 @@
-# FoxxCyber Web Application
+# Foxx Cyber
+Business Security Experts at your Service!
+## Transforming Security Into Your Competitive Edge
 
-## Docker Deployment Guide
+Foxx Cyber provides expert cybersecurity services designed to protect organizations while enabling business growth. Based in Boise, Idaho, we offer strategic security leadership and compliance solutions for companies of all sizes across industries.
 
-This guide will help you deploy the FoxxCyber web application on your VPS using Docker.
+## Our Core Services
 
-### Prerequisites
+### Virtual CISO Services
+Executive-level security leadership at a fraction of the cost of a full-time hire. Our vCISO service provides:
 
-- A VPS with Docker and Docker Compose installed
-- Git installed on your VPS
-- Domain name (optional but recommended)
+- Strategic security planning and roadmap development
+- Comprehensive policy framework implementation
+- Risk assessment and management
+- Security metrics and executive reporting
+- Team security awareness training
 
-### Installation Steps
+### ATO as a Service
+Streamlined path to system authorization and compliance verification. Benefits include:
 
-1. Clone the repository:
-```bash
-git clone [your-repository-url]
-cd foxxcyber.web
-```
+- Complete system security assessment
+- Tailored control implementation
+- Documentation development and management
+- Continuous monitoring and improvement
+- Evidence packages for stakeholders
 
-2. Set up environment variables:
-```bash
-cp .env.production.example .env.production
-```
-Edit `.env.production` with your actual values:
-- Set `TWENTY_CRM_URL` to your Twenty CRM instance URL
-- Set `TWENTY_API_KEY` to your Twenty CRM API key
+### Risk Assessment
+Comprehensive evaluation of your security posture with actionable recommendations:
 
-3. Build and start the containers:
-```bash
-docker compose up -d
-```
+- Identification of hidden vulnerabilities
+- Industry benchmark comparison
+- Prioritized action plans
+- Executive summaries and detailed technical reports
 
-The application will be available at `http://your-server-ip:3001`
+## Our Security Philosophy
 
-### Configuration
+At Foxx Cyber, we believe:
 
-- The application runs on port 3001 by default (mapped from container port 3000)
-- Redis is used for rate limiting and caching
-- All data persists through Docker volumes
+- **Security should enable business**, not impede it
+- **Risk management** is more valuable than checkbox compliance
+- **People and process** matter as much as technology
+- **Adaptable frameworks** work better than rigid standards
 
-### Resource Usage
+We implement the NIST Risk Management Framework (RMF) across all industries, not just government, delivering measurable security improvements and business value.
 
-The Docker configuration includes resource limits:
-- Web application: Max 1 CPU, 1GB RAM
-- Redis: Max 0.5 CPU, 512MB RAM
+## Get In Touch
 
-### Health Checks
+Ready to transform your security approach?
 
-Both services include health checks:
-- Web application: Checks `/api/health` endpoint every 30 seconds
-- Redis: Performs PING command every 30 seconds
+- Email: jprice@foxxcyber.com
+- Website: [https://www.foxxcyber.com](https://www.foxxcyber.com)
+- Phone: (800) FOXX-CYBER
 
-### Maintenance
-
-To view logs:
-```bash
-docker compose logs -f
-```
-
-To update the application:
-```bash
-git pull
-docker compose down
-docker compose up -d --build
-```
-
-### Backup
-
-Redis data is persisted in a Docker volume. To backup the data:
-```bash
-docker run --rm -v foxxcyber.web_redis_data:/data -v $(pwd)/backup:/backup alpine tar czf /backup/redis-backup.tar.gz /data
-```
-
-### Troubleshooting
-
-If the application fails to start:
-1. Check logs: `docker compose logs`
-2. Verify environment variables in `.env.production`
-3. Ensure all required ports are available
-4. Check system resources
-
-For more detailed logs:
-```bash
-docker compose logs -f --tail=100
+Schedule a consultation to discuss how our security expertise can help protect your business while supporting your growth objectives.
