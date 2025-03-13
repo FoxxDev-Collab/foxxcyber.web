@@ -197,7 +197,7 @@ const categories: Category[] = [
   }
 ]
 
-export default function AdvancedAssessment() {
+export default function BasicAssessment() {
   const [currentCategory, setCurrentCategory] = React.useState(0)
   const [scores, setScores] = React.useState<{[key: string]: number}>({})
   const [showResults, setShowResults] = React.useState(false)
