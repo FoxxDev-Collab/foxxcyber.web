@@ -43,13 +43,6 @@ export default function ContactPage() {
                   </div>
                   
                   <div>
-                    <h3 className="font-semibold text-primary dark:text-primary/90 mb-2">Call Us</h3>
-                    <p className="text-gray-700 dark:text-gray-300">
-                      <a href="tel:+1800FOXXCYBER" className="hover:underline">(208)-901-1974</a>
-                    </p>
-                  </div>
-                  
-                  <div>
                     <h3 className="font-semibold text-primary dark:text-primary/90 mb-2">Office Location</h3>
                     <p className="text-gray-700 dark:text-gray-300">
                       Boise, Idaho
